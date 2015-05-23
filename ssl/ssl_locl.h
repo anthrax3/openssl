@@ -616,6 +616,8 @@ typedef struct cert_st {
 # ifndef OPENSSL_NO_DH
     DH *dh_tmp;
     DH *(*dh_tmp_cb) (SSL *ssl, int is_export, int keysize);
+    /* Select DH parameters automatically */
+    int dh_tmp_auto;
 # endif
 # ifndef OPENSSL_NO_ECDH
     EC_KEY *ecdh_tmp;
@@ -1103,6 +1105,7 @@ int ssl_get_server_cert_serverinfo(SSL *s, const unsigned char **serverinfo,
                                    size_t *serverinfo_length);
 #  endif
 EVP_PKEY *ssl_get_sign_pkey(SSL *s, const SSL_CIPHER *c, const EVP_MD **pmd);
+DH *ssl_get_auto_dh(SSL *s);
 int ssl_cert_type(X509 *x, EVP_PKEY *pkey);
 void ssl_set_cert_masks(CERT *c, const SSL_CIPHER *cipher);
 STACK_OF(SSL_CIPHER) *ssl_get_ciphers_by_id(SSL *s);

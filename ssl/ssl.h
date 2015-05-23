@@ -1975,6 +1975,7 @@ DECLARE_PEM_rw(SSL_SESSION, SSL_SESSION)
 # define SSL_CTRL_GET_CHAIN_CERTS                115
 # define SSL_CTRL_SELECT_CURRENT_CERT            116
 # define SSL_CTRL_SET_CURRENT_CERT               117
+# define SSL_CTRL_SET_DH_AUTO                    118
 # define SSL_CTRL_CHECK_PROTO_VERSION            119
 # define DTLS_CTRL_SET_LINK_MTU                  120
 # define DTLS_CTRL_GET_LINK_MIN_MTU              121
@@ -2003,6 +2004,10 @@ DECLARE_PEM_rw(SSL_SESSION, SSL_SESSION)
         SSL_CTX_ctrl(ctx,SSL_CTRL_SET_TMP_DH,0,(char *)dh)
 # define SSL_CTX_set_tmp_ecdh(ctx,ecdh) \
         SSL_CTX_ctrl(ctx,SSL_CTRL_SET_TMP_ECDH,0,(char *)ecdh)
+#define SSL_CTX_set_dh_auto(ctx, onoff) \
+        SSL_CTX_ctrl(ctx,SSL_CTRL_SET_DH_AUTO,onoff,NULL)
+#define SSL_CTX_set_ecdh_auto(ctx, onoff) \
+        SSL_CTX_ctrl(ctx,SSL_CTRL_SET_ECDH_AUTO,onoff,NULL)
 # define SSL_need_tmp_RSA(ssl) \
         SSL_ctrl(ssl,SSL_CTRL_NEED_TMP_RSA,0,NULL)
 # define SSL_set_tmp_rsa(ssl,rsa) \
